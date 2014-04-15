@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	    <meta charset="utf-8"/>
+	    
+	    <!-- example of jquery checkview component -->
+	    
+	    <title>Countimator Example</title>
+	    
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	    
+	    <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+	    
+	    <!-- bootstrap3 -->
+	    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	    
+	    <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.2/handlebars.min.js"></script>
+	    
+	    <!--<script src="https://raw.githubusercontent.com/benignware/jquery-example/master/dist/js/jquery.example.min.js"></script>-->
+		  
+		  <script src="../src/js/jquery.countimator.js"></script>
+		  
+		  <script src="../../jquery-example/src/js/jquery.example.js"></script>
+	</head>
+	<body>
+		
+		<header class="subhead" id="overview">
+		  <div class="container">
+		    <h1>jquery-countimator</h1>
+		    <p class="lead">Animated counter</p>
+		  </div>
+		</header>
+		
+    <div class="container">
+
+		  <div class="row">
+		    <div class="col-md-8">
+          
+    			<h2>Basic usage</h2>
+
+    			<p>Init the countimator-plugin:</p>
+          <script data-example="examples">
+            $(function() {
+              // countimator default
+              $(".counter").countimator();
+            });
+          </script>
+    		
+    			<h4>Basic markup examples</h4>
+
+          <p data-example="example1" data-example-html="inner">
+    			  You got to count it <span class="counter counter-default badge">20</span> times
+    			</p>
+    			
+          <p data-example="example2" data-example-html="inner">
+            <span class="counter counter-default">
+             You achieved <span class="counter-count badge">1430</span> 
+             out of <span class="counter-max badge">150</span> points
+           </span>
+          </p>
+           
+           <h2>Template example</h2>
+           <p>Countimator supports template-engines that follow the compile-pattern such as Handlebars.<br/>
+             You may apply a template in three different ways:
+           </p>
+           <h4>Using the template-option</h4>
+           <p data-example="example3">
+             <span class="counter counter-default" data-value="120" data-max="1000" data-template="You achieved &lt;span class='badge'&gt;{{count}}&lt;/span&gt; out of &lt;span class='badge'&gt;{{max}}&lt;/span&gt; points."></span>
+           </p>
+           
+           
+           <h4>Using an inline template</h4>
+           <p data-example="example4">
+             <span class="counter counter-default" data-value="120" data-max="1000">
+              <script type="text/x-handlebars-template">
+                You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
+              </script>
+             </span>
+           </p>
+           
+           <h4>Using a selector</h4>
+           <p data-example="example5">
+             <span class="counter counter-default" data-template="#counter-template" data-value="120" data-max="1000"></span>
+             <script id="counter-template" type="text/x-handlebars-template">
+                You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
+             </script>
+           </p>
+           
+           <h2>Number formatting</h2>
+           <p>Use the following options to format values used by countimator: <code>decimals</code>, <code>decimalDelimiter</code>,<code>thousandDelimiter</code></p>
+           <p data-example="example6">
+             <span class="counter counter-default badge" 
+              data-decimals="2" data-decimal-delimiter="," 
+              data-thousand-delimiter="." data-value="12000.32" 
+              data-template="{{count}} EUR">
+             </span>
+           </p>
+           
+           <p>Pad leading zeros by using the <code>pad</code>-option</p>
+           <p data-example="example7">
+             <span class="counter counter-default badge" 
+              data-value="100" 
+              data-pad="3" 
+              data-template="{{count}} %"> 
+             </span>
+           </p>
+
+           <h2>Custom styles</h2>
+
+           <p>Countimator has built-in support for drawing on a canvas-background.</p>
+           <p>You can customize the appearance of countimator by providing an object containing a <code>render</code>- and <code>draw</code>-method as <code>style</code>-option</p>
+           
+           <h4>Wheel example</h4>
+           <p>Countimator is shipped with a custom wheel-style.</p>
+           
+           <p>
+            Add the wheel-plugin after jquery.countimator.js as well as the basic css theme
+           </p>
+           <script src="../src/js/jquery.countimator.wheel.js" data-example="example8" data-example-html="outer"></script>
+           <link href="../src/css/countimator.wheel.css" rel="stylesheet" data-example="example8" data-example-html="outer">
+           
+           <p data-example="example8">
+              <span class="counter counter-wheel" data-style="wheel" data-max="12" data-value="8" data-count="0">
+                <script type="text/x-handlebars-template">
+                  {{count}} <hr/> {{max}}
+                </script>
+              </span>
+           </p>
+           
+          
+          <!--
+          <h2>Interaction</h2>
+          <p>Connect countup and countdown-buttons with the plugin-instance.</p>
+          <p data-example="example9" data-example-html="inner">
+            <span class="counter counter-interaction badge">20</span>
+            <span class="btn-group">
+             <a href="#" class="nav-countup btn btn-default btn-xs"><i class="glyphicon glyphicon-plus"></i></a>
+             <a href="#" class="nav-countdown btn btn-default btn-xs"><i class="glyphicon glyphicon-minus"></i></a>
+            </span>
+          </p>
+          
+          <script data-example="example9" data-example-html="outer">
+            var countimator = $(".counter.counter-interaction").countimator({
+              template: "{{count}}", 
+              animateOnInit: true
+            }).data('countimator');
+            
+            $("a.nav-countup").on('click', function(event) {
+              console.info("click", this);
+              var value = countimator.getOption('value');
+              console.log("count up: ", value);
+              countimator.setOption('value', value + 1);
+              event.preventDefault();
+            });
+            
+            $("a.nav-countdown").on('click', function(event) {
+              var value = countimator.getOption('value');
+              countimator.setOption('value', value - 1);
+              event.preventDefault();
+            });
+          
+          </script>
+          
+          <p data-example="example9"></p>
+          -->
+        </div>
+    	  
+		  </div>
+		  
+		
+	</body>
+</html>
