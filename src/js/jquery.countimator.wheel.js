@@ -20,8 +20,7 @@
     resize: function(element, width, height) {
       var $element = $(element);
       $element.css({
-        //height: $element.width() + "px", 
-        //display: $element.css('display') == 'inline' ? 'inline-block' : 'block'
+        // change some styles
       });
     }, 
       
