@@ -1,5 +1,5 @@
 .counter.counter-wheel {
-  width: 80px;
+  max-width: 80px;
   position: relative;
   /*-moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
