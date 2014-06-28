@@ -1,5 +1,5 @@
 .counter.counter-wheel {
-  max-width: 80px;
+  width: 80px;
   position: relative;
   /*-moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
@@ -12,6 +12,7 @@
   background-color: darkgray;
   font-size: 12px;
   display: block;
+  text-align: center;
 }
 
 .counter.counter-wheel:before{
@@ -32,4 +33,5 @@
 
 .counter.counter-wheel hr {
   margin: 5px;
+  border-color: #fff;
 }

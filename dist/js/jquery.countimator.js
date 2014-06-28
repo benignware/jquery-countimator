@@ -22,6 +22,9 @@
     decimalDelimiter: '.', 
     thousandDelimiter: null, 
     pad: false, 
+    // appearance
+    textAlign: '', 
+    verticalAlign: 'middle'
   };
   
   var dataOpts = [
@@ -116,11 +119,13 @@
     var instance = this;
     var $element = $(element);
     
-    $(dataOpts).each(function(index, value) {
-      if (typeof $element.data(value) != 'undefined') {
-        options[value] = $element.data(value);
-      }
-    });
+    options = $.extend({}, defaults, options, $element.data());
+    
+    // $(dataOpts).each(function(index, value) {
+      // if (typeof $element.data(value) != 'undefined') {
+        // options[value] = $element.data(value);
+      // }
+    // });
     
     var canvas, ctx, container, body;
     var startTime, startCount;
@@ -278,24 +283,65 @@
     function resize() {
       
       var position = $element.css('position');
-      var fontSize = parseFloat($element.css('font-size'));
-      var lineHeight = parseFloat($element.css('line-height'));
       var display = $element.css('display');
       
-      $element.css({
-        position: position != "static" ? position : 'relative', 
-        textAlign: 'center' 
-      });
-      
+      var $body = $element.find("." + this.getOption('bodyClass'));
+
       var width = $element.width();
       var height = $element.height();
       
+      var outerWidth = $element.outerWidth(false);
+      var outerHeight = $element.outerHeight(false);
+      
+      // reset element
+      $element.css({
+        textAlign: ''
+      });
+      
+      var textAlign = this.getOption('textAlign') || $element.css('text-align');
+      var verticalAlign = this.getOption('verticalAlign');
+      
+      $element.css({
+        textAlign: textAlign
+      });
+      
+      // TODO: replace canvas with background
+      
       if (canvas) {
+        
+        $element.css({
+          position: position != "static" ? position : 'relative' 
+        });
+        
         $(canvas).css({
           position: 'absolute',
           top: 0, 
-          left: 0, 
+          left: 0
         });
+        
+        // vertical-align
+        var paddingLeft = parseFloat($element.css('padding-left'));
+        var paddingRight = parseFloat($element.css('padding-right'));
+        var paddingTop = parseFloat($element.css('padding-top'));
+        var paddingBottom = parseFloat($element.css('padding-top'));
+        var top, bottom;
+        if (verticalAlign == 'justify') {
+          top = paddingTop; 
+          bottom = paddingBottom;
+        } else {
+          var va = verticalAlign == 'left' ? 0 : verticalAlign == 'right' ? 1 : 0.5;
+          top = paddingTop + ( height - $body.outerHeight(false) ) * va;
+          bottom = 'auto';
+        }
+        $body.css({
+          position: 'absolute', 
+          top: top, 
+          bottom: bottom,  
+          left: paddingLeft, 
+          right: paddingRight, 
+          textAlign: textAlign
+        });
+        
       }
       
       var style = getOption('style');
@@ -384,7 +430,8 @@
         var tmpl = engine.compile(template);
         
         if (tmpl) {
-          string = tmpl({count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
+          var tmplData = $.extend({}, options, {count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
+          string = tmpl(tmplData);
         }
         
         var div = document.createElement('div');
@@ -505,7 +552,7 @@
     return this.each(function() {
 
       if (!$(this).data(pluginName)) {
-        $(this).data(pluginName, new pluginClass(this, $.extend({}, defaults, options)));
+        $(this).data(pluginName, new pluginClass(this, options));
       }
       
       return $(this);
