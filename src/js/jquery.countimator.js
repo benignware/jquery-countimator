@@ -290,6 +290,9 @@
       var width = $element.width();
       var height = $element.height();
       
+      var outerWidth = $element.outerWidth(false);
+      var outerHeight = $element.outerHeight(false);
+      
       // reset element
       $element.css({
         textAlign: ''
@@ -317,13 +320,25 @@
         });
         
         // vertical-align
-        var va = verticalAlign == 'left' ? 0 : verticalAlign == 'right' ? 1 : 0.5;
+        var paddingLeft = parseFloat($element.css('padding-left'));
+        var paddingRight = parseFloat($element.css('padding-right'));
+        var paddingTop = parseFloat($element.css('padding-top'));
+        var paddingBottom = parseFloat($element.css('padding-top'));
+        var top, bottom;
+        if (verticalAlign == 'justify') {
+          top = paddingTop; 
+          bottom = paddingBottom;
+        } else {
+          var va = verticalAlign == 'left' ? 0 : verticalAlign == 'right' ? 1 : 0.5;
+          top = paddingTop + ( height - $body.outerHeight(false) ) * va;
+          bottom = 'auto';
+        }
         $body.css({
           position: 'absolute', 
-          top: ( height - $body.outerHeight(false) ) * va, 
-          bottom: 'auto',  
-          left: 0, 
-          right: 0, 
+          top: top, 
+          bottom: bottom,  
+          left: paddingLeft, 
+          right: paddingRight, 
           textAlign: textAlign
         });
         
@@ -415,7 +430,8 @@
         var tmpl = engine.compile(template);
         
         if (tmpl) {
-          string = tmpl({count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
+          var tmplData = $.extend({}, options, {count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
+          string = tmpl(tmplData);
         }
         
         var div = document.createElement('div');
