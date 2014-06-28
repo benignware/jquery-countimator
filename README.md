@@ -115,3 +115,32 @@ Provide counter markup
   </script>
 </span>
 ```
+
+### Styling the wheel plugin
+You can style the wheel plugin using traditional css and the <code>maxColor</code>-, <code>valueColor</code>- and <code>lineWidth</code>-options.
+```html
+<style>
+  .counter.counter-wheel.counter-wheel-themed {
+    background-color: transparent;
+    border: none;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    width: 150px;
+  }
+</style>
+<span class="counter counter-wheel counter-wheel-themed" 
+  data-style="wheel" 
+  data-max="12" 
+  data-value="8" 
+  data-count="0" 
+  data-pad="2" 
+  data-value-color="green" 
+  data-line-width="30" 
+  data-max-color="red">
+  <script type="text/x-handlebars-template">
+   {{count}} / {{max}}
+  </script>
+</span>
+```
+

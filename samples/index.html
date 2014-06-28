@@ -125,7 +125,7 @@
            <p>Countimator has built-in support for drawing on a canvas-background.</p>
            <p>You can customize the appearance of countimator by providing an object containing a <code>render</code>- and <code>draw</code>-method as <code>style</code>-option</p>
            
-           <h4>Wheel example</h4>
+           <h3>Using the wheel plugin</h3>
            <p>Countimator is shipped with a custom wheel-style.</p>
            
            <p>
@@ -148,6 +148,35 @@
               </span>
            </p>
            
+           <h4>Styling the wheel plugin</h4>
+           <p>
+             You can style the wheel plugin using traditional css and the <code>maxColor</code>-, <code>valueColor</code>- and <code>lineWidth</code>-options.
+           </p>
+           <p data-example="example8">
+             <style>
+               .counter.counter-wheel.counter-wheel-themed {
+                 background-color: transparent;
+                 border: none;
+                 color: #000;
+                 font-size: 20px;
+                 font-weight: bold;
+                 width: 150px;
+               }
+             </style>
+             <span class="counter counter-wheel counter-wheel-themed" 
+               data-style="wheel" 
+               data-max="12" 
+               data-value="8" 
+               data-count="0" 
+               data-pad="2" 
+               data-value-color="green" 
+               data-line-width="30" 
+               data-max-color="red">
+               <script type="text/x-handlebars-template">
+                 {{count}} / {{max}}
+               </script>
+             </span>
+           </p>
           
           <!--
           <h2>Interaction</h2>
