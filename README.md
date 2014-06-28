@@ -122,13 +122,29 @@ Use the `verticalAlign`-option if you need to style the inner border.
            
 
 ```css
+
 .counter.counter-wheel.counter-wheel-themed {
   background-color: transparent;
-  border: none;
+  border: lightgray solid 10px;
   color: #000;
-  font-size: 20px;
+  width: 200px;
+  padding: 15px;
+  font-size: 14px;
+  text-transform: uppercase;
+  line-height: 1em;
+}
+.counter.counter-wheel.counter-wheel-themed .counter-values {
+  font-size: 42px;
   font-weight: bold;
-  width: 150px;
+  line-height: 1.2em;
+}
+.counter.counter-wheel.counter-wheel-themed .counter-separator {
+  margin: 0 2px 0 3px;
+}
+.counter.counter-wheel.counter-wheel-themed .counter-body {
+  border: lightgray solid 10px;
+  border-radius: 50%;
+  padding: 25px 0;
 }
 ```
 
@@ -147,7 +163,9 @@ Use the `verticalAlign`-option if you need to style the inner border.
     <div>
       <div>your</div>
       <div class="counter-values">
-        <span style="color: {{valueColor}}">{{count}}</span><span class="counter-separator">/</span><span style="color: {{maxColor}}">{{max}}</span>
+        <span style="color: {{valueColor}}">{{count}}</span>
+        <span class="counter-separator">/</span>
+        <span style="color: {{maxColor}}">{{max}}</span>
       </div>
       <div>score</div>
     </div>
