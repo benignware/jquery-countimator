@@ -116,7 +116,7 @@ Provide counter markup
 </span>
 ```
 
-### Styling the wheel plugin
+#### Styling the wheel plugin
 You can style the wheel plugin using traditional css and the `maxColor`-, `valueColor`- and `lineWidth`-options. 
 Use the `verticalAlign`-option if you need to style the inner border.
            
