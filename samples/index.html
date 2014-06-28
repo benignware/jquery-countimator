@@ -39,7 +39,6 @@
     			<p>Init the countimator-plugin:</p>
           <script data-example="examples">
             $(function() {
-              // countimator default
               $(".counter").countimator();
             });
           </script>
@@ -59,29 +58,39 @@
            
            <h2>Template example</h2>
            <p>Countimator supports template-engines that follow the compile-pattern such as Handlebars.</p>
-           <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.2/handlebars.min.js" data-example="examples-template" data-example-html="outer"></script>
+           <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.2/handlebars.min.js"></script>
            
            <p>
              You may apply a template in three different ways:
            </p>
            <h4>Using the template-option</h4>
            <p data-example="example3">
-             <span class="counter counter-default" data-value="120" data-max="1000" data-template="You achieved &lt;span class='badge'&gt;{{count}}&lt;/span&gt; out of &lt;span class='badge'&gt;{{max}}&lt;/span&gt; points."></span>
+             <span class="counter counter-default" 
+               data-value="120" 
+               data-max="1000" 
+               data-template="You achieved &lt;span class='badge'&gt;{{count}}&lt;/span&gt; out of &lt;span class='badge'&gt;{{max}}&lt;/span&gt; points.">
+             </span>
            </p>
            
            
            <h4>Using an inline template</h4>
            <p data-example="example4">
-             <span class="counter counter-default" data-value="120" data-max="1000">
-              <script type="text/x-handlebars-template">
-                You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
-              </script>
+             <span class="counter counter-default" 
+               data-value="120" 
+               data-max="1000">
+               <script type="text/x-handlebars-template">
+                 You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
+               </script>
              </span>
            </p>
            
            <h4>Using a selector</h4>
            <p data-example="example5">
-             <span class="counter counter-default" data-template="#counter-template" data-value="120" data-max="1000"></span>
+             <span class="counter counter-default" 
+               data-template="#counter-template" 
+               data-value="120" 
+               data-max="1000">
+             </span>
              <script id="counter-template" type="text/x-handlebars-template">
                 You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
              </script>
@@ -100,9 +109,9 @@
            <p>Pad leading zeros by using the <code>pad</code>-option</p>
            <p data-example="example7">
              <span class="counter counter-default badge" 
-              data-value="100" 
-              data-pad="3" 
-              data-template="{{count}} %"> 
+               data-value="100" 
+               data-pad="3" 
+               data-template="{{count}} %"> 
              </span>
            </p>
 
@@ -117,11 +126,17 @@
            <p>
             Add the wheel-plugin after jquery.countimator.js as well as the basic css theme
            </p>
-           <script src="../src/js/jquery.countimator.wheel.js" data-example="example8" data-example-html="outer"></script>
-           <link href="../src/css/countimator.wheel.css" rel="stylesheet" data-example="example8" data-example-html="outer">
+           <div data-example="example8" data-example-html="inner">
+             <script src="../src/js/jquery.countimator.wheel.js"></script>
+             <link href="../src/css/countimator.wheel.css" rel="stylesheet">
+           </div>
            
            <p data-example="example8">
-              <span class="counter counter-wheel" data-style="wheel" data-max="12" data-value="8" data-count="0">
+              <span class="counter counter-wheel" 
+                data-style="wheel" 
+                data-max="12" 
+                data-value="8" 
+                data-count="0">
                 <script type="text/x-handlebars-template">
                   {{count}} <hr/> {{max}}
                 </script>
