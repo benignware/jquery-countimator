@@ -117,30 +117,41 @@ Provide counter markup
 ```
 
 ### Styling the wheel plugin
-You can style the wheel plugin using traditional css and the <code>maxColor</code>-, <code>valueColor</code>- and <code>lineWidth</code>-options.
+You can style the wheel plugin using traditional css and the `maxColor`-, `valueColor`- and `lineWidth`-options. 
+Use the `verticalAlign`-option if you need to style the inner border.
+           
+
+```css
+.counter.counter-wheel.counter-wheel-themed {
+  background-color: transparent;
+  border: none;
+  color: #000;
+  font-size: 20px;
+  font-weight: bold;
+  width: 150px;
+}
+```
+
 ```html
-<style>
-  .counter.counter-wheel.counter-wheel-themed {
-    background-color: transparent;
-    border: none;
-    color: #000;
-    font-size: 20px;
-    font-weight: bold;
-    width: 150px;
-  }
-</style>
-<span class="counter counter-wheel counter-wheel-themed" 
+<div class="counter counter-wheel counter-wheel-themed" 
   data-style="wheel" 
   data-max="12" 
   data-value="8" 
   data-count="0" 
   data-pad="2" 
-  data-value-color="green" 
-  data-line-width="30" 
-  data-max-color="red">
+  data-value-color="#E71232" 
+  data-max-color="#131432" 
+  data-vertical-align="justify" 
+  data-line-width="15">
   <script type="text/x-handlebars-template">
-   {{count}} / {{max}}
+    <div>
+      <div>your</div>
+      <div class="counter-values">
+        <span style="color: {{valueColor}}">{{count}}</span><span class="counter-separator">/</span><span style="color: {{maxColor}}">{{max}}</span>
+      </div>
+      <div>score</div>
+    </div>
   </script>
-</span>
+</div>
 ```
 
