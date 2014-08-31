@@ -32,6 +32,7 @@
       var max = this.getOption('max');
       
       var rad = (count / max) * Math.PI * 2;
+      rad = !isNaN(rad) ? rad : 0; 
       
       var lineWidth = this.getOption('lineWidth');
 
