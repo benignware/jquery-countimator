@@ -264,9 +264,7 @@
           }
           break;
         case 'max': 
-          if (!value) {
-            value = parseFloat(options.value);
-          }
+          value = parseFloat(value ? value : options.value);
           break;
         case 'min': 
           if (!value) {
