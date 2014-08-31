@@ -158,7 +158,7 @@
           options.max = maxNode.nodeValue;
         }
       }
-
+      
       // init template
       
       var script = $element.find("script[type*='text/x-']");
@@ -190,19 +190,20 @@
         resize.call(instance);
       });
       
+      
       $(window).on('scroll touchmove', function() {
         if (getOption('animateOnInit') && getOption('animateOnAppear') && isElementInViewport(element)) {
-          start.call(instance); 
+          $(window).off('scroll touchmove', arguments.callee);
+          start.call(instance);
         }
       });
       
-      render.call(this);
-      
-      resize.call(this);
+      // render.call(this);
       
       if (getOption('animateOnInit')) {
         if (getOption('animateOnAppear') && isElementInViewport(element)) {
-          start();
+          options.count = typeof count == 'number' ? count : 0; 
+          start.call(instance);
         } else {
           render.call(this);
         }
@@ -216,15 +217,20 @@
     };
     
     function setOption(name, value) {
-      if (name == "style") return // style cannot be set at runtime
+      if (name == "style") return; // style cannot be set at runtime
+      var old = options[name];
       options[name] = value;
       switch (name) {
         case 'value': 
-          if (!animating) {
+          if (old == value) {
+            return;
+          }
+          if (typeof old != 'number') {
             options['count'] = value;
             render.call(this);
           } else {
-            animate(value);
+            options['count'] = old;
+            start();
           }
           break;
        }
@@ -246,13 +252,15 @@
           }
           break;
         case 'count': 
-          var max = getOption('max');
-          var min = getOption('min');
-          value = Math.max(value, min);
-          value = Math.min(value, max);
-          value = parseFloat(value);
-          if (isNaN(value)) {
-            value = min;
+          if (!value) {
+            var max = getOption('max');
+            var min = getOption('min');
+            value = Math.max(value, min);
+            value = Math.min(value, max);
+            value = parseFloat(value);
+            if (isNaN(value)) {
+              value = min;
+            }
           }
           break;
         case 'max': 
@@ -282,17 +290,10 @@
     
     function resize() {
       
-      var position = $element.css('position');
-      var display = $element.css('display');
+      
       
       var $body = $element.find("." + this.getOption('bodyClass'));
 
-      var width = $element.width();
-      var height = $element.height();
-      
-      var outerWidth = $element.outerWidth(false);
-      var outerHeight = $element.outerHeight(false);
-      
       // reset element
       $element.css({
         textAlign: ''
@@ -319,6 +320,33 @@
           left: 0
         });
         
+        // reset body
+        $body.css({
+          position: 'absolute', 
+          top: "", 
+          bottom: "",  
+          left: "", 
+          right: "", 
+          textAlign: "", 
+          display: 'none'
+        });
+        
+        
+        
+      }
+      
+      
+      var position = $element.css('position');
+      var display = $element.css('display');
+
+      var width = $element.width();
+      var height = $element.height();
+      
+      var outerWidth = $element.outerWidth(false);
+      var outerHeight = $element.outerHeight(false);
+      
+      
+      if (canvas) {
         // vertical-align
         var paddingLeft = parseFloat($element.css('padding-left'));
         var paddingRight = parseFloat($element.css('padding-right'));
@@ -329,17 +357,19 @@
           top = paddingTop; 
           bottom = paddingBottom;
         } else {
-          var va = verticalAlign == 'left' ? 0 : verticalAlign == 'right' ? 1 : 0.5;
+          var va = verticalAlign == 'top' ? 0 : verticalAlign == 'bottom' ? 1 : 0.5;
           top = paddingTop + ( height - $body.outerHeight(false) ) * va;
           bottom = 'auto';
         }
+        
         $body.css({
           position: 'absolute', 
           top: top, 
           bottom: bottom,  
           left: paddingLeft, 
           right: paddingRight, 
-          textAlign: textAlign
+          textAlign: textAlign, 
+          display: ''
         });
         
       }
@@ -433,7 +463,6 @@
           var tmplData = $.extend({}, options, {count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
           string = tmpl(tmplData);
         }
-        
         var div = document.createElement('div');
         div.innerHTML = string;
         var nodeList = div.childNodes; 
@@ -457,11 +486,14 @@
         if (countNode) {
           countNode.nodeValue = formattedCount;
         }
-        
         // set max (there will be no max-node when using templates)
         var maxNode = getMaxNode();
         if (maxNode) {
           maxNode.nodeValue = formattedMax;
+        }
+        
+        if (!countNode && !maxNode) {
+          element.innerHTML = formattedCount;
         }
       
       }
