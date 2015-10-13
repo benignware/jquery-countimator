@@ -32,3 +32,6 @@ node_modules
 
 # GFM Preview
 .*.md.html
+
+# Site
+site
