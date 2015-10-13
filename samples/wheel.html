@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+      <meta charset="utf-8"/>
+      
+      <!-- example of jquery checkview component -->
+      
+      <title>jquery-countimator</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      
+      <script src="http://codeorigin.jquery.com/jquery-1.10.2.min.js"></script>
+      
+      <script src="../src/jquery.countimator.js"></script>
+      <script src="../src/jquery.countimator.wheel.js"></script>
+      
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.2/handlebars.min.js"></script>
+      
+      
+      <style>
+        .counter path {
+          fill: red;
+          transition: all 0.25s ease-in;
+        } 
+        .counter .counter-count {
+          color: red;
+          transition: all 0.25s ease-in;
+        }
+        .counter-level-warn path {
+          fill: orange;
+        }
+        .counter-level-warn .counter-count {
+          color: orange;
+        }
+        .counter-level-ok path {
+          fill: green;
+        }
+        .counter-level-ok .counter-count {
+          color: green;
+        }
+        .counter {
+          text-transform: uppercase;
+          text-align: center;
+          font-size: 16px;
+        }
+      </style>
+  </head>
+  <body>
+     <div class="counter counter-wheel" 
+       data-style="wheel" 
+       data-max="12" 
+       data-value="10" 
+       data-pad="2" 
+       data-line-width="15">
+         <div>your</div>
+         <div class="counter-values">
+           <span class="counter-count">0</span><span class="counter-separator">/</span><span class="counter-max">12</span>
+         </div>
+         <div>score</div>
+     </div>
+     <script>
+      
+        $('.counter').countimator({
+          step: function(count, options) {
+            var
+              p = count / options.max;
+            $('.counter').toggleClass('counter-level-ok', p >= 0.75);
+            $('.counter').toggleClass('counter-level-warn', p >= 0.1 && p < 0.75);
+            $('.counter').toggleClass('counter-level-critical', p < 0.1);
+          }
+        });
+        
+      </script>
+  </body>
+</html>
