@@ -3,6 +3,8 @@ jquery-countimator
 
 > Animated counter
 
+[Demo](http://benignware.github.io/jquery-countimator)
+
 ## Usage
 
 Include dependencies.
