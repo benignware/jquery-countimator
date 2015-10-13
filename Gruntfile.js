@@ -39,7 +39,7 @@ module.exports = function(grunt) {
           base: 'site'
         },
         // These files will get pushed to the `gh-pages` branch (the default).
-        src: ['index.html', 'jquery.vgrd.min.js']
+        src: ['**/*']
       }
     }
   });
