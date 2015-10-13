@@ -2,6 +2,7 @@
   "name": "jquery-countimator",
   "version": "0.0.2",
   "description": "Animated counter",
+  "homepage": "http://benignware.github.io/jquery-countimator",
   "author": {
     "name": "Benignware",
     "email": "mail@benignware.com",
