@@ -23,6 +23,9 @@ module.exports = function(grunt) {
     },
     livemd: {
       options: {
+        prefilter: function(string) {
+          return string.replace(grunt.config().pkg && grunt.config().pkg.homepage && new RegExp("\\[.*\\]\\(" + grunt.config().pkg.homepage.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&") + "\\)", "gi"), "");
+        }
       },
       site: {
         files: {
