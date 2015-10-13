@@ -3,8 +3,14 @@ jquery-countimator
 
 > Animated counter
 
-Basic Usage
------------
+## Usage
+
+Include dependencies.
+
+```html
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="jquery.countimator.min.js"></script>
+```
 
 ```js
 $(function() {
@@ -13,19 +19,25 @@ $(function() {
 ```
 
 ```html
-You got to count it <span class="counter counter-default badge">20</span> times
+You got to count it <span class="counter counter-default badge">1000</span> times
 ```
 
 ### Using inline html
 ```html
 <span class="counter counter-default">
- You achieved <span class="counter-count badge">1430</span>
- out of <span class="counter-max badge">150</span> points
+ You achieved <span class="counter-count badge">120</span>
+ out of <span class="counter-max badge">1000</span> points
 </span>
 ```
 
 ### Using a template-engine
-Countimator supports template-engines that follow the compile-pattern such as Handlebars.
+Countimator supports templates with [Handlebars](http://handlebarsjs.com/) 
+
+Include handlebars as dependency:
+
+```html
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.3/handlebars.min.js"></script>
+```
 
 You may apply a template in three different ways:
 
@@ -34,34 +46,34 @@ You may apply a template in three different ways:
 * Using a selector
 
 #### Using the template-option
-```html
-<span class="counter counter-default" 
+```html+handlebars
+<div class="counter counter-default" 
   data-value="120" 
   data-max="1000" 
   data-template="You achieved <span class='badge'>{{count}}</span> out of <span class='badge'>{{max}}</span> points.">
-</span>
+</div>
 ```
 
 #### Using an inline template
-```html
-<span class="counter counter-default" 
+```html+handlebars
+<div class="counter counter-default" 
   data-value="120" 
   data-max="1000">
  <script type="text/x-handlebars-template">
-   You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
+   You achieved <span class="badge">{{count}}</span> out of <span class="badge">{{max}}</span> points.
  </script>
-</span>
+</div>
 ```
 
 #### Using a selector
-```html
-<span class="counter counter-default" 
+```html+handlebars
+<div class="counter counter-default" 
   data-template="#counter-template" 
   data-value="120" 
   data-max="1000">
-</span>
+</div>
 <script id="counter-template" type="text/x-handlebars-template">
-   You achieved <div class="badge">{{count}}</div> out of <div class="badge">{{max}}</div> points.
+   You achieved <span class="badge">{{count}}</span> out of <span class="badge">{{max}}</span> points.
 </script>
 ```
 
@@ -87,89 +99,219 @@ Pad leading zeros by using the `pad`-option
 </span>
 ```
 
-Custom styles
--------------
+## Callbacks
 
-Countimator has built-in support for drawing on a canvas-background.
-
-You can customize the appearance of countimator by providing an object containing a render- and draw-method as `style`-option
-
-### Wheel example
-
-Countimator is shipped with a custom wheel-style.
-
-Add the wheel-plugin after jquery.countimator.js as well as the basic css theme 
-```html
-<script src="../src/js/jquery.countimator.wheel.js"></script>
-<link href="../src/css/countimator.wheel.css" rel="stylesheet">
-```
-Provide counter markup 
-```html
-<span class="counter counter-wheel" 
-  data-style="wheel" 
-  data-max="12" 
-  data-value="8" 
-  data-count="0">
-  <script type="text/x-handlebars-template">
-    {{count}} <hr/> {{max}}
-  </script>
-</span>
-```
-
-#### Styling the wheel plugin
-You can style the wheel plugin using traditional css and the `maxColor`-, `valueColor`- and `lineWidth`-options. 
-Use the `verticalAlign`-option if you need to style the inner border.
-           
-
-```css
-
-.counter.counter-wheel.counter-wheel-themed {
-  background-color: transparent;
-  border: lightgray solid 10px;
-  color: #000;
-  width: 200px;
-  padding: 15px;
-  font-size: 14px;
-  text-transform: uppercase;
-  line-height: 1em;
-}
-.counter.counter-wheel.counter-wheel-themed .counter-values {
-  font-size: 42px;
-  font-weight: bold;
-  line-height: 1.2em;
-}
-.counter.counter-wheel.counter-wheel-themed .counter-separator {
-  margin: 0 2px 0 3px;
-}
-.counter.counter-wheel.counter-wheel-themed .counter-body {
-  border: lightgray solid 10px;
-  border-radius: 50%;
-  padding: 25px 0;
-}
-```
+Get notified when animation changes by providing a callback function to `start`, `step` or `complete`-option.
 
 ```html
-<div class="counter counter-wheel counter-wheel-themed" 
-  data-style="wheel" 
-  data-max="12" 
-  data-value="8" 
-  data-count="0" 
-  data-pad="2" 
-  data-value-color="#E71232" 
-  data-max-color="#131432" 
-  data-vertical-align="justify" 
-  data-line-width="15">
-  <script type="text/x-handlebars-template">
-    <div>
-      <div>your</div>
-      <div class="counter-values">
-        <span style="color: {{valueColor}}">{{count}}</span>
-        <span class="counter-separator">/</span>
-        <span style="color: {{maxColor}}">{{max}}</span>
-      </div>
-      <div>score</div>
-    </div>
-  </script>
+<div class="counter-callbacks" 
+  data-duration="2500" 
+  data-value="120" 
+  data-pad="3"
+  data-highscore="65">
+  You achieved <span class="counter-count">0</span> out of <span class="badge counter-max">1000</span> points.
 </div>
 ```
 
+```css
+.counter-callbacks {
+  transition: all 0.5s ease-out; 
+  position: relative;
+  top: 0;
+  opacity: 1;
+}
+.counter-callbacks:after {
+  transition: all 0.5s ease-out;
+  opacity: 0;
+  content: "New Highscore!";
+  font-size: 60%;
+  vertical-align: top;
+  background: #ddd;
+  border-radius: 4px;
+  padding: 4px;
+}
+.counter-callbacks.highscore:after {
+  opacity: 1;
+}
+.counter-callbacks.highscore {
+  color: teal;
+}
+.counter-callbacks.running,
+.counter-callbacks.complete {
+  font-size: 22px;
+}
+.counter-callbacks.complete {
+  top: -1em;
+  opacity: 0;
+  transition-duration: 2s;
+  transition-delay: 1s;
+}
+```
+
+```js
+$('.counter-callbacks').countimator({
+  start: function(count, options) {
+    $(this).toggleClass('running');
+  },
+  step: function(count, options) {
+    $(this).toggleClass('highscore', count > $(this).data('highscore'));
+  },
+  complete: function() {
+    $(this).toggleClass('running');
+    $(this).toggleClass('complete');
+  }
+});
+```
+
+
+## Wheel
+
+Countimator is shipped with a custom wheel-style.
+
+Add the wheel-plugin after jquery.countimator.js
+```html
+<script src="jquery.countimator.wheel.min.js"></script>
+```
+
+The appearance of the wheel can be customized using tradional css. See the following code for an example of using the wheel-plugin with callbacks and custom styles:
+
+
+Provide counter markup
+ 
+```html
+<div class="counter-wheel" 
+ data-style="wheel" 
+ data-max="12" 
+ data-value="10" 
+ data-pad="2">
+   <span class="counter-count">0</span><hr/><span class="counter-max">12</span>
+</div>
+```
+
+Initialize countimator with callbacks
+```js
+$(function() {
+  $('.counter-wheel').countimator({
+    step: function(count, options) {
+      var
+        p = count / options.max;
+      $('.counter-wheel').toggleClass('counter-level-ok', p >= 0.75);
+      $('.counter-wheel').toggleClass('counter-level-warn', p >= 0.1 && p < 0.75);
+      $('.counter-wheel').toggleClass('counter-level-critical', p < 0.1);
+    }
+  });
+});
+```
+
+```css
+.counter-wheel path {
+  fill: red;
+  transition: all 0.25s ease-in;
+} 
+.counter-wheel .counter-count {
+  color: red;
+  transition: all 0.25s ease-in;
+}
+.counter-level-warn path {
+  fill: orange;
+}
+.counter-level-warn .counter-count {
+  color: orange;
+}
+.counter-level-ok path {
+  fill: green;
+}
+.counter-level-ok .counter-count {
+  color: green;
+}
+```
+
+
+## Options
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>animateOnAppear</td>
+      <td>Specifies whether to start animation when scrolled into view. Defaults to `true`</td>
+    </tr>
+    <tr>
+      <td>animateOnInit</td>
+      <td>Specifies whether to start animation when initialized. Defaults to `true`</td>
+    </tr>
+    <tr>
+      <td>complete</td>
+      <td>Callback function to be executed when animation completes.</td>
+    </tr>
+    <tr>
+      <td>count</td>
+      <td>Current animation count. Updated on step. Defaults to `0`</td>
+    </tr>
+    <tr>
+      <td>countSelector</td>
+      <td>Specifies the selector of count element. Defaults to `'.counter-count'`</td>
+    </tr>
+    <tr>
+      <td>decimals</td>
+      <td>Specifies the number of decimals for number formatting. Defaults to `0`</td>
+    </tr>
+    <tr>
+      <td>decimalDelimiter</td>
+      <td>Specifies a decimal separator for number formatting. Defaults to `.`</td>
+    </tr>
+    <tr>
+      <td>duration</td>
+      <td>Specifies the animation duration in milliseconds. Defaults to `1400`</td>
+    </tr>
+    <tr>
+      <td>engine</td>
+      <td>Specifies the template engine to use. `Handlebars` used, if defined</td>
+    </tr>
+    <tr>
+      <td>max</td>
+      <td>Specifies the maximum value of the animation. Defaults to `0`</td>
+    </tr>
+    <tr>
+      <td>maxSelector</td>
+      <td>Specifies the selector of maximum element. Defaults to `'.counter-max'`</td>
+    </tr>
+    <tr>
+      <td>min</td>
+      <td>Specifies the minimum value of the animation. Defaults to `null`</td>
+    </tr>
+    <tr>
+      <td>pad</td>
+      <td>Specifies the number of digits to be padded with leading zeros</td>
+    </tr>
+    <tr>
+      <td>start</td>
+      <td>Callback function to be executed when animation starts.</td>
+    </tr>
+    <tr>
+      <td>step</td>
+      <td>Callback function to be executed when animation on animation step.</td>
+    </tr>
+    <tr>
+      <td>style</td>
+      <td>Specifies a custom style. Either provide a string identifier of a predefined style or an object containing a `render`-method.</td>
+    </tr>
+    <tr>
+      <td>template</td>
+      <td>Either specifies an inline-template or a selector for dom-template.</td>
+    </tr>
+    <tr>
+      <td>thousandDelimiter</td>
+      <td>Specifies a thousand delimiter for number formatting. Defaults to `null`</td>
+    </tr>
+    <tr>
+      <td>value</td>
+      <td>Specifies the target value of the animation. Defaults to `null`</td>
+    </tr>
+  </tbody>
+</table>
