@@ -11,7 +11,7 @@ Include dependencies.
 
 ```html
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="jquery.countimator.min.js"></script>
+<script src="js/jquery.countimator.min.js"></script>
 ```
 
 ```js
@@ -21,14 +21,14 @@ $(function() {
 ```
 
 ```html
-You got to count it <span class="counter counter-default badge">1000</span> times
+You got to count it <kbd class="counter counter-default">1000</kbd> times
 ```
 
 ### Using inline html
 ```html
 <span class="counter counter-default">
- You achieved <span class="counter-count badge">120</span>
- out of <span class="counter-max badge">1000</span> points
+ You achieved <kbd class="counter-count">120</kbd>
+ out of <kbd class="counter-max">1000</kbd> points
 </span>
 ```
 
@@ -52,7 +52,7 @@ You may apply a template in three different ways:
 <div class="counter counter-default" 
   data-value="120" 
   data-max="1000" 
-  data-template="You achieved <span class='badge'>{{count}}</span> out of <span class='badge'>{{max}}</span> points.">
+  data-template="You achieved <kbd>{{count}}</kbd> out of <kbd>{{max}}</kbd> points.">
 </div>
 ```
 
@@ -62,7 +62,7 @@ You may apply a template in three different ways:
   data-value="120" 
   data-max="1000">
  <script type="text/x-handlebars-template">
-   You achieved <span class="badge">{{count}}</span> out of <span class="badge">{{max}}</span> points.
+   You achieved <kbd>{{count}}</kbd> out of <kbd>{{max}}</kbd> points.
  </script>
 </div>
 ```
@@ -75,7 +75,7 @@ You may apply a template in three different ways:
   data-max="1000">
 </div>
 <script id="counter-template" type="text/x-handlebars-template">
-   You achieved <span class="badge">{{count}}</span> out of <span class="badge">{{max}}</span> points.
+   You achieved <kbd>{{count}}</kbd> out of <kbd>{{max}}</kbd> points.
 </script>
 ```
 
@@ -83,22 +83,47 @@ Number formatting
 -----------------
 Use the following options to format values used by countimator: `decimals`, `decimalDelimiter`,`thousandDelimiter`
 ```html
-<span class="counter counter-default badge" 
+<kbd class="counter counter-default" 
   data-decimals="2" 
   data-decimal-delimiter="," 
   data-thousand-delimiter="." 
   data-value="12000.32" 
-  data-template="{{count}} EUR">
-</span>
+  data-template="{{count}} EUR">0 EUR
+</kbd>
 ```
 Pad leading zeros by using the `pad`-option
 
 ```html
-<span class="counter counter-default badge" 
+<kbd class="counter counter-default badge" 
   data-value="100" 
   data-pad="3" 
-  data-template="{{count}} %">
-</span>
+  data-template="{{count}} %">000 %
+</kbd>
+```
+
+## Trigger update
+
+To trigger the animation from an event at runtime, just call countimator again with a new value:
+
+```html
+<kbd class="counter counter-default" 
+  data-decimals="2" 
+  data-decimal-delimiter="," 
+  data-thousand-delimiter="." 
+  data-value="12000.32" 
+  data-template="{{count}} EUR">0 EUR
+</kbd>
+<button id="update-counter">
+  Want more?
+</button>
+```
+
+```js
+$('#update-counter').on('click', function() {
+  $(this).fadeOut(500).prev().countimator({
+    value: 22000.12
+  });
+}); 
 ```
 
 ## Callbacks
@@ -111,7 +136,7 @@ Get notified when animation changes by providing a callback function to `start`,
   data-value="120" 
   data-pad="3"
   data-highscore="65">
-  You achieved <span class="counter-count">0</span> out of <span class="badge counter-max">1000</span> points.
+  You achieved <kbd class="counter-count">0</kbd> out of <kbd class="counter-max">1000</kbd> points.
 </div>
 ```
 
@@ -121,6 +146,7 @@ Get notified when animation changes by providing a callback function to `start`,
   position: relative;
   top: 0;
   opacity: 1;
+  text-transform: uppercase;
 }
 .counter-callbacks:after {
   transition: all 0.5s ease-out;
@@ -171,63 +197,116 @@ $('.counter-callbacks').countimator({
 Countimator is shipped with a custom wheel-style.
 
 Add the wheel-plugin after jquery.countimator.js
+
 ```html
-<script src="jquery.countimator.wheel.min.js"></script>
+<script src="js/jquery.countimator.wheel.min.js"></script>
 ```
 
-The appearance of the wheel can be customized using tradional css. See the following code for an example of using the wheel-plugin with callbacks and custom styles:
+Include the wheel stylesheet.
 
-
-Provide counter markup
- 
 ```html
-<div class="counter-wheel" 
+<link rel="stylesheet" href="css/jquery.countimator.wheel.css"></link>
+```
+
+```html
+<div class="counter counter-wheel" 
  data-style="wheel" 
  data-max="12" 
- data-value="10" 
- data-pad="2">
-   <span class="counter-count">0</span><hr/><span class="counter-max">12</span>
+ data-value="10"
+ data-count="0"  
+ data-pad="2">0
 </div>
 ```
 
-Initialize countimator with callbacks
-```js
-$(function() {
-  $('.counter-wheel').countimator({
-    step: function(count, options) {
-      var
-        p = count / options.max;
-      $('.counter-wheel').toggleClass('counter-level-ok', p >= 0.75);
-      $('.counter-wheel').toggleClass('counter-level-warn', p >= 0.1 && p < 0.75);
-      $('.counter-wheel').toggleClass('counter-level-critical', p < 0.1);
-    }
-  });
-});
+```css
+.counter-wheel{
+  color: teal;
+}
 ```
 
+### Customize
+
+See the following code for an example of using the wheel-plugin with styles, callbacks and triggers:
+
+```html
+<div class="counter-wheel counter-wheel-callbacks" 
+ data-style="wheel" 
+ data-max="12" 
+ data-value="2" 
+ data-pad="2">
+  <div class="counter-wheel-content">
+    <small>Your</small><br/>
+    <div><span class="counter-count counter-wheel-highlight">00</span>/<span class="counter-max">12</span></div>
+    <small>Score</small>
+  </div>
+</div>
+<button>Click me!</button>
+```
+
+Customize appearance using css:
+
 ```css
-.counter-wheel path {
-  fill: red;
-  transition: all 0.25s ease-in;
-} 
-.counter-wheel .counter-count {
-  color: red;
-  transition: all 0.25s ease-in;
+.counter-wheel-callbacks {
+  width: 200px;
+  height: 200px;
+  border-color: #ddd;
+  border-width: 10px;
+  background: #101433;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 15px;
+  line-height: 28px;
 }
-.counter-level-warn path {
-  fill: orange;
+
+.counter-wheel-callbacks .counter-wheel-content {
+  background: #fff;
+  color: #000;
 }
-.counter-level-warn .counter-count {
+
+.counter-wheel-callbacks .counter-wheel-content > div {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+.counter-wheel-callbacks .counter-wheel-content > div > * {
+  margin: 0 5px;
+}
+
+.counter-wheel-callbacks .counter-wheel-highlight {
+  transition: all .25s ease-in;
+  color: #E71232;
+}
+
+.counter-level-warn .counter-wheel-highlight {
   color: orange;
 }
-.counter-level-ok path {
-  fill: green;
-}
-.counter-level-ok .counter-count {
+
+.counter-level-ok .counter-wheel-highlight {
   color: green;
 }
 ```
 
+Initialize countimator with callbacks and register button listener
+```js
+$(function() {
+  $('.counter-wheel-callbacks').countimator({
+    step: function(count, options) {
+      var
+        p = count / options.max;
+      $(this).toggleClass('counter-level-ok', p >= 0.5);
+      $(this).toggleClass('counter-level-warn', p >= 0.25 && p < 0.5);
+      $(this).toggleClass('counter-level-critical', p < 0.25);
+    }
+  });
+  $('.counter-wheel-callbacks + button').on('click', function() {
+    var countimator = $('.counter-wheel-callbacks').data('countimator');
+    $(this).fadeOut(500).prev().countimator({
+      value: 8
+    });
+  });
+});
+```
 
 ## Options
 
