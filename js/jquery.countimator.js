@@ -161,11 +161,14 @@
         resize.call(instance);
       });
       
-      $(window).on('scroll touchmove', function() {
+      function scrollListener() {
         if (options.animateOnInit && options.animateOnAppear && inView(element)) {
+          $(window).off('scroll touchmove', scrollListener);
           start.call(instance);
         }
-      });
+      }
+      
+      $(window).on('scroll touchmove', scrollListener);
       
       if (options.animateOnInit) {
         if (options.animateOnAppear && inView(element)) {
