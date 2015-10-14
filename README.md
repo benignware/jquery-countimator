@@ -146,10 +146,10 @@ Get notified when animation changes by providing a callback function to `start`,
   position: relative;
   top: 0;
   opacity: 1;
-  text-transform: uppercase;
 }
 .counter-callbacks:after {
   transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
   opacity: 0;
   content: "New Highscore!";
   font-size: 60%;
