@@ -331,11 +331,11 @@ div.highlight-example .counter-callbacks {
   position: relative;
   top: 0;
   opacity: 1;
-  text-transform: uppercase;
 }
 
 div.highlight-example .counter-callbacks:after {
   transition: all 0.5s ease-out;
+  -webkit-transition: all 0.5s ease-out;
   opacity: 0;
   content: "New Highscore!";
   font-size: 60%;
@@ -372,10 +372,10 @@ div.highlight-example .counter-callbacks.complete {
   <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
   <span class="k">top</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
   <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
-  <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.counter-callbacks</span><span class="nd">:after</span> <span class="p">{</span>
   <span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0.5s</span> <span class="n">ease</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
+  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0.5s</span> <span class="n">ease</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
   <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
   <span class="k">content</span><span class="o">:</span> <span class="s2">&quot;New Highscore!&quot;</span><span class="p">;</span>
   <span class="k">font-size</span><span class="o">:</span> <span class="m">60%</span><span class="p">;</span>
