@@ -1,0 +1,81 @@
+.counter-wheel {
+  width: 5em;
+  height: 5em;
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.5em;
+  font-family: monospace;
+  background: #fff;
+  color: #000;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.counter-wheel:before {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  max-width:100%;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  content: "";
+  display: block;
+  border-radius: 50%;
+}
+
+.counter-wheel-content {
+  content: "";
+  text-align: center;
+  border-width: inherit;
+  border-style: solid;   
+  border-color: inherit;
+  border-radius: 50%;
+  background: inherit;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+  
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-pack: center;
+  -moz-box-align: center;
+
+  display: box;
+  box-orient: vertical;
+  box-pack: center;
+  box-align: center;
+  
+  max-height: 100%;
+}
+
+.counter-wheel svg {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  max-width:100%;
+  width: 100%;
+  height: 100%;
+}
+
+.counter-wheel svg .counter-wheel-highlight {
+  fill: currentColor;
+}
+
+.counter-wheel-highlight {
+  color: teal;
+  color: currentColor;
+}
