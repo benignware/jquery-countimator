@@ -1,106 +1,138 @@
 (function ( $, window ) {
   
-  var pluginName = 'countimator';
-  
-  var defaults = {
-    // Values
-    count: 0,
-    value: null, 
-    min: null,
-    max: 0,
-    // Animation options
-    duration: 1000, 
-    // Property selector
-    countSelector: '.counter-count', 
-    maxSelector: '.counter-max', 
-    // Template options
-    template: null, 
-    engine: null,
-    // Trigger animation options
-    animateOnInit: true, 
-    animateOnAppear: true, 
-    // Format options 
-    decimals: 0, 
-    decimalDelimiter: '.', 
-    thousandDelimiter: null, 
-    pad: false,
-    // Style plugin
-    style: null, 
-    // Callbacks
-    start: function() {},
-    step: function(step) {},
-    complete: function() {}
-  };
-  
-  function formatNumber(n, decimals, decimalDelimiter, thousandDelimiter){
-    decimals = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals, 
-    decimalDelimiter = typeof decimalDelimiter == 'undefined' ? "." : decimalDelimiter, 
-    thousandDelimiter = typeof thousandDelimiter == 'undefined' ? "," : thousandDelimiter, 
-    thousandDelimiter = typeof thousandDelimiter == 'string' ? thousandDelimiter : "", 
-    s = n < 0 ? "-" : "", 
-    i = parseInt(n = Math.abs(+n || 0).toFixed(decimals)) + "", 
-    j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + thousandDelimiter : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousandDelimiter) + (decimals ? decimalDelimiter + Math.abs(n - i).toFixed(decimals).slice(2) : "");
-  };
-  
-  function pad(number, length) {
-    var str = '' + number;
-    while (str.length < length) {
-        str = '0' + str;
-    }
-    return str;
-  }
-  
-  function textNodes(parent) {
-    return $(parent).contents().filter(function () {
-      return this.nodeType === Node.TEXT_NODE;
-    });
-  }
-  
-  function inView(elem){
-    var $elem = $(elem);
-    var $window = $(window);
-
-    var docViewTop = $window.scrollTop();
-    var docViewBottom = docViewTop + $window.height();
-
-    var elemTop = $elem.offset().top;
-    var elemBottom = elemTop + $elem.height();
-
-    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
-  };
-
-  // Request animation frame Polyfill
-  var requestAnimationFrame = 
-    window.mozRequestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    window.oRequestAnimationFrame || 
-    function( callback ){
-      window.setTimeout(callback, 1000 / 60);
-    };
-
-  var pluginClass = function Countimator(element, options) {
+  var
+    pluginName = 'countimator',
+    defaults = {
+      // Values
+      count: 0,
+      value: null, 
+      min: null,
+      max: 0,
+      // Animation options
+      duration: 1000, 
+      // Property selector
+      countSelector: '.counter-count', 
+      maxSelector: '.counter-max', 
+      // Template options
+      template: null, 
+      engine: null,
+      // Trigger animation options
+      animateOnInit: true, 
+      animateOnAppear: true, 
+      // Format options 
+      decimals: 0, 
+      decimalDelimiter: '.', 
+      thousandDelimiter: null, 
+      pad: false,
+      // Style plugin
+      style: null, 
+      // Callbacks
+      start: function() {},
+      step: function(step) {},
+      complete: function() {}
+    },
     
-    var instance = this;
-    var $element = $(element);
+    /**
+     * Format a number
+     * @param {Object} n
+     * @param {Object} decimals
+     * @param {Object} decimalDelimiter
+     * @param {Object} thousandDelimiter
+     */
+    formatNumber = function(number, decimals, decimalDelimiter, thousandDelimiter) {
+      decimals = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
+      decimalDelimiter = typeof decimalDelimiter === 'undefined' ? "." : decimalDelimiter;
+      thousandDelimiter = typeof thousandDelimiter === 'undefined' ? "," : thousandDelimiter; 
+      thousandDelimiter = typeof thousandDelimiter === 'string' ? thousandDelimiter : ""; 
+      var
+        s = number < 0 ? "-" : "",
+        n = Math.abs(+number || 0).toFixed(decimals), 
+        i = String(parseInt(n)), 
+        j = (i.length > 3 ? i.length % 3 : 0);
+      
+      return s + (j ? i.substr(0, j) + thousandDelimiter : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousandDelimiter) + (decimals ? decimalDelimiter + Math.abs(n - i).toFixed(decimals).slice(2) : "");
+    },
+    
+    /**
+     * Pad a number with leading zeros
+     * @param {Object} number
+     * @param {Object} length
+     */
+    pad = function(number, length) {
+      var str = '' + number;
+      while (str.length < length) {
+          str = '0' + str;
+      }
+      return str;
+    },
+  
+    /**
+     * Return parent's textnodes
+     * @param {Object} parent
+     */
+    textNodes = function(parent) {
+      return $(parent).contents().filter(function () {
+        return this.nodeType === 3;
+      });
+    },
+  
+    /**
+     * Detect if element is in viewport
+     * @param {Object} elem
+     */
+    inView = function(elem){
+      var
+        $elem = $(elem),
+        $window = $(window),
+        docViewTop = $window.scrollTop(),
+        docViewBottom = docViewTop + $window.height(),
+        elemTop = $elem.offset().top,
+        elemBottom = elemTop + $elem.height();
+      return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+    },
+    
+    /**
+     * A Polyfill for requestAnimationFrame
+     */
+    requestAnimationFrame = 
+      window.mozRequestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      window.oRequestAnimationFrame || 
+      function( callback ){
+        window.setTimeout(callback, 1000 / 60);
+      };
+
+
+  /**
+   * Countimator
+   * @param {Object} element
+   * @param {Object} options
+   */
+  function Countimator(element, options) {
+    
+    var
+      instance = this,
+      $element = $(element),
+      animating = false,
+      startTime, startCount;
     
     options = $.extend({}, defaults, options, $element.data());
     
-    var startTime, startCount;
-    var animating = false;
-    
-    
-    // private methods
+    // Private Methods
     function init() {
     
-      var value = getValue();
-      var count = getCount();
-      var max = getMax();
+      var
+        value = getValue(),
+        count = getCount(),
+        countNode,
+        max = getMax(),
+        maxNode,
+        script;
       
-      // init values
+      // Init values
       if (!count) {
-        var countNode = getCountNode();
+        countNode = getCountNode();
         if (countNode) {
           if (typeof options.value !== 'number') {
             options.value = countNode.nodeValue;
@@ -111,36 +143,33 @@
       }
       
       if (!max) {
-        var maxNode = getMaxNode();
+        maxNode = getMaxNode();
         if (maxNode) {
           options.max = maxNode.nodeValue;
         }
       }
       
-      // init template
-      var script = $element.find("script[type*='text/x-']");
+      // Init template
+      script = $element.find("script[type*='text/x-']");
       if (script.length) {
         options.template = script.html();
         script.remove();
       }
 
-      // init listeners
+      // Init listeners
       $(window).on('resize', function() {
         resize.call(instance);
       });
       
       $(window).on('scroll touchmove', function() {
         if (options.animateOnInit && options.animateOnAppear && inView(element)) {
-          $(window).off('scroll touchmove', arguments.callee);
-          if (!animating) {
-            start.call(instance);
-          }
+          start.call(instance);
         }
       });
       
       if (options.animateOnInit) {
         if (options.animateOnAppear && inView(element)) {
-          options.count = typeof count == 'number' ? count : 0; 
+          options.count = typeof count === 'number' ? count : 0; 
           start.call(instance);
         } else {
           render.call(this);
@@ -151,17 +180,18 @@
       }
       
       resize.call(this);
-    };
+    }
     
     function setOption(name, value) {
-      var old = options[name];
+      var
+        old = options[name];
       options[name] = value;
       switch (name) {
         case 'value': 
-          if (old == value) {
+          if (old === value) {
             return;
           }
-          if (typeof old != 'number') {
+          if (typeof old !== 'number') {
             options['count'] = value;
             render.call(this);
           } else {
@@ -173,20 +203,23 @@
     }
     
     function getMin() {
-      var min = parseFloat(options.min);
+      var
+        min = parseFloat(options.min);
       return isNaN(min) ? 0 : min;
     }
     
     function getMax() {
-      var max = parseFloat(options.max);
+      var
+        max = parseFloat(options.max);
       return isNaN(max) ? 0 : max;
     }
     
     function getValue() {
-      var max = getMax();
-      var min = getMin();
-      var count = getCount();
-      var value = parseFloat(options.value);
+      var
+        max = getMax(),
+        min = getMin(),
+        count = getCount(),
+        value = parseFloat(options.value);
       if (isNaN(value)) {
         value = min;
       }
@@ -194,66 +227,31 @@
     }
     
     function getCount() {
-      var max = getMax();
-      var min = getMin();
-      var count = parseFloat(options.count);
+      var
+        max = getMax(),
+        min = getMin(),
+        count = parseFloat(options.count);
       if (isNaN(count)) {
         count = min;
       }
       return count;
     }
-    /*
-    function getOption(name) {
-      var value = options[name];
-      switch (name) {          
-        case 'value': 
-          var max = getOption('max');
-          var min = getOption('min');
-          var count = getOption('count');
-          var floatValue = parseFloat(value);
-          if (!isNaN(floatValue)) {
-            floatValue = Math.max(floatValue, min);
-            value = Math.min(floatValue, max);
-          }
-          break;
-        case 'count': 
-          if (!value) {
-            var max = getOption('max');
-            var min = getOption('min');
-            value = Math.max(value, min);
-            value = Math.min(value, max);
-            value = parseFloat(value);
-            if (isNaN(value)) {
-              value = min;
-            }
-          }
-          break;
-        case 'max': 
-          value = parseFloat(value ? value : options.value);
-          break;
-        case 'min': 
-          if (!value) {
-            value = 0;
-          }
-          break;
-      }
-      return value;
-    }*/
     
     function resize() {
-    };
+    }
     
     function getCountNode(count) {
-      var countElement = $element.find(options.countSelector)[0];
+      var
+        countElement = $element.find(options.countSelector)[0];
       if (!countElement) {
         countElement = $element.find("*").last().siblings().addBack()[0];
       }
-      var textNode = textNodes(countElement || element)[0];
-      return textNode;
+      return textNodes(countElement || element)[0];
     }
     
     function getMaxNode(count) {
-      var maxElement = $element.find(options.maxSelector)[0];
+      var
+        maxElement = $element.find(options.maxSelector)[0];
       if (maxElement) {
         return textNodes(maxElement)[0];
       }
@@ -262,61 +260,58 @@
     
     function getFormattedValue(value) {
       // format number
-      var decimals = options.decimals;
-      var decimalDelimiter = options.decimalDelimiter;
-      var thousandDelimiter = options.thousandDelimiter;
-      string = formatNumber(value, decimals, decimalDelimiter, thousandDelimiter);
-      // pad
-      string = pad(string, options.pad);
+      var
+        decimals = options.decimals,
+        decimalDelimiter = options.decimalDelimiter,
+        thousandDelimiter = options.thousandDelimiter,
+        string = formatNumber(value, decimals, decimalDelimiter, thousandDelimiter);
+        // Pad
+        string = pad(string, options.pad);
       return string;
     }
     
     function render() {
 
-      var max = getMax();
-      var min = getMin();
-      var value = getValue();
-      var count = getCount();
-      
-      var formattedCount = getFormattedValue(count);
-      var formattedValue = getFormattedValue(value);
-      var formattedMax = getFormattedValue(max);
-      var formattedMin = getFormattedValue(min);
-      
-      var engine = options.engine || typeof Handlebars !== 'undefined' ? Handlebars : null;
-      
-      var template = options.template;
+      var
+        max = getMax(),
+        min = getMin(),
+        value = getValue(),
+        count = getCount(),
+        formattedCount = getFormattedValue(count),
+        formattedValue = getFormattedValue(value),
+        formattedMax = getFormattedValue(max),
+        formattedMin = getFormattedValue(min),
+        engine = options.engine || typeof window['Handlebars'] !== 'undefined' ? window['Handlebars'] : null,
+        template = options.template,
+        string, div, $template, tmpl, tmplData, nodeList, countNode, maxNode, style;
       
       try {
-        var $template = $(options.template);
+        $template = $(options.template);
         template = $template.length && $template[0].innerHTML || template;
       } catch (e) {
         // Template is not a dom element
       }
       
-      var string;
       if (engine && template) {
         // Template engine
-        var tmpl = engine.compile(template);
+        tmpl = engine.compile(template);
         if (tmpl) {
-          var tmplData = $.extend({}, options, {count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
+          tmplData = $.extend({}, options, {count: formattedCount, value: formattedValue, max: formattedMax, min: formattedMin});
           string = tmpl(tmplData);
         }
-        var div = document.createElement('div');
+        div = document.createElement('div');
         div.innerHTML = string;
-        var nodeList = div.childNodes;
+        nodeList = div.childNodes;
         $(element).contents().remove();
         $(element).append(nodeList);
         
       } else {
         // Classic approach without a template engine
-        string = formattedCount;
-        // set count
-        var countNode = getCountNode();
+        countNode = getCountNode();
         if (countNode) {
           countNode.nodeValue = formattedCount;
         }
-        var maxNode = getMaxNode();
+        maxNode = getMaxNode();
         if (maxNode) {
           maxNode.nodeValue = formattedMax;
         }
@@ -326,7 +321,7 @@
       }
       
       if (options.style) {
-        var style = $.fn[pluginName].getStyle(options.style);
+        style = $.fn[pluginName].getStyle(options.style);
         if (style && style.render) {
           style.render.call(element, count, options);
         }
@@ -345,10 +340,9 @@
       if (!animating) {
         startTime = new Date().getTime();
         startCount = getCount();
-        var startCallback = options.start;
         animating = true;
-        if (typeof startCallback === 'function') {
-          startCallback.call(element);
+        if (typeof options.start === 'function') {
+          options.start.call(element);
         }
         requestAnimationFrame(step);
       }
@@ -356,25 +350,22 @@
 
     function step() {
         
-      var duration = options.duration;
-      var max = getMax();
-      var value = getValue();
-      
-      var currentTime = new Date().getTime();
-      var endTime = startTime + duration;
-      
-      var currentStep = Math.min((duration - (endTime - currentTime)) / duration, 1);
-      
-      var count = startCount + currentStep * (value - startCount);
+      var
+        duration = options.duration,
+        max = getMax(),
+        value = getValue(),
+        currentTime = new Date().getTime(),
+        endTime = startTime + duration,
+        currentStep = Math.min((duration - (endTime - currentTime)) / duration, 1),
+        count = startCount + currentStep * (value - startCount);
       
       options.count = count;
       
       render.call(this);
       
       // Step Callback
-      var stepCallback = options.step;
-      if (typeof stepCallback === 'function') {
-        stepCallback.call(element, count, options);
+      if (typeof options.step === 'function') {
+        options.step.call(element, count, options);
       }
       
       if (currentStep < 1 && animating) {
@@ -389,24 +380,15 @@
     
     function stop() {
       animating = false;
-      var completeCallback = options.complete;
-      if (typeof completeCallback === 'function') {
-        completeCallback.call(element);
+      if (typeof options.complete === 'function') {
+        options.complete.call(element);
       }
     }
     
-    // public methods
+    // Public methods
     
     this.resize = function() {
       resize.call(this);
-    };
-    
-    this.getOption = function(name) {
-      return getOption.call(this, name);
-    };
-    
-    this.setOption = function(name, value) {
-      setOption.call(this, name, value);
     };
     
     this.animate = function(value) {
@@ -425,21 +407,20 @@
       return $.extend(true, {}, options);
     };
     
-    // call init
+    // Init
     init.call(this);
 
-  };
+  }
   
 
-  // bootstrap plugin
-  
+  // Bootstrap JQuery-Plugin
   $.fn[pluginName] = function(options) {
     return this.each(function() {
       var
-        opts = $.extend(true, {}, options);
+        opts = $.extend(true, {}, options),
         countimator = $(this).data(pluginName);
       if (!countimator) {
-        $(this).data(pluginName, new pluginClass(this, opts));
+        $(this).data(pluginName, new Countimator(this, opts));
       } else {
         countimator.setOptions(opts);
       }
@@ -448,15 +429,19 @@
   };
   
   
-  // style api
-  var styles = {};
-  $.fn[pluginName].registerStyle = function(name, def) {
-    styles[name] = def; 
-  };
-  
-  $.fn[pluginName].getStyle = function(name) {
-    return styles[name];
-  };
+  // Style api
+  (function() {
+    var
+      styles = {};
+    $.fn[pluginName].registerStyle = function(name, def) {
+      styles[name] = def; 
+    };
+    
+    $.fn[pluginName].getStyle = function(name) {
+      return styles[name];
+    };
+    
+  })();
   
 
 })( jQuery, window );

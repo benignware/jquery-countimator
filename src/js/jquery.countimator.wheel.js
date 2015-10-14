@@ -31,15 +31,17 @@
         radius = 200,
         min = options.min ? parseFloat(options.min) : 0,
         max = options.max ? parseFloat(options.max) : 0,
-        count = Math.min(options.max, Math.max(options.min, count)),
         cx = radius,
         cy = radius,
         r = radius,
         p = (count - min) / (max - min),
         a = p * Math.PI * 2,
         d = arcPath(cx, cy, r + 1, 0, a),
-        $graphics = $(this).find('> .counter-wheel-graphics');
+        $graphics = $(this).find('> .counter-wheel-graphics'),
+
         $content = $(this).find('> .counter-wheel-content');
+      
+      count = Math.min(max, Math.max(min, count));
       
       if (!$content.length) {
         $(this).prepend($(this).wrapInner('<div class="counter-wheel-content"></div>'));
@@ -47,11 +49,10 @@
       
       if (!$graphics.length) {
         $graphics = $(
-          '<svg preserveAspectRatio="none" class="counter-wheel-graphics" viewBox="0 0 ' + radius * 2 + ' ' + radius * 2 + '">'
-          + '<path class="counter-wheel-highlight" d="M0 0" fill="teal"/>' + 
+          '<svg preserveAspectRatio="none" class="counter-wheel-graphics" viewBox="0 0 ' + radius * 2 + ' ' + radius * 2 + '">' + 
+            '<path class="counter-wheel-highlight" d="M0 0" fill="teal"/>' + 
           '</svg>'
         );
-        //$content = $svg.find('foreignObject > div').prepend($(this).contents());
         $(this).prepend($graphics);
       }
       
