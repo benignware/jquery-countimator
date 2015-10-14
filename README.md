@@ -219,7 +219,7 @@ Include the wheel stylesheet.
 ```
 
 ```css
-.counter-wheel{
+.counter-wheel {
   color: teal;
 }
 ```
@@ -275,6 +275,7 @@ Customize appearance using css:
 
 .counter-wheel-callbacks .counter-wheel-highlight {
   transition: all .25s ease-in;
+  -webkit-transition: all .25s ease-in;
   color: #E71232;
 }
 
