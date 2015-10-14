@@ -10,6 +10,12 @@ module.exports = function(grunt) {
         expand: true, cwd: 'dist/', src: ['**/*'], dest: 'site/'
       }
     }, 
+    jshint: {
+      all: ["src/**/*.js"],
+      options: {
+        jshintrc: ".jshintrc"
+      }
+    },
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
@@ -49,13 +55,12 @@ module.exports = function(grunt) {
   
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-livemd');
   grunt.loadNpmTasks('grunt-gh-pages');
 
-  grunt.registerTask('default', ['copy:dist', 'jshint', 'uglify']);
-  
-  grunt.registerTask('build', ['copy:dist', 'uglify']);
-  
+  grunt.registerTask('build', ['copy:dist', 'jshint', 'uglify']);
   grunt.registerTask('site', ['build', 'copy:site', 'livemd:site']);
+  grunt.registerTask('default', ['build']);
   
 };
