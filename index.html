@@ -136,13 +136,13 @@
 <h2 id="usage">Usage</h2>
 <p>Include dependencies.</p>
 <div><script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="jquery.countimator.min.js"></script>
+<script src="js/jquery.countimator.min.js"></script>
 </div>
 
 
 
 <div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://code.jquery.com/jquery-1.11.2.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.countimator.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/jquery.countimator.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 <script>
 try { $(function() {
@@ -156,24 +156,24 @@ try { $(function() {
 <span class="p">});</span>
 </pre></div>
 <div class="highlight-example">
-You got to count it <span class="counter counter-default badge">1000</span> times
+You got to count it <kbd class="counter counter-default">1000</kbd> times
 </div>
 
 
-<div class="highlight"><pre>You got to count it <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter counter-default badge&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/span&gt;</span> times
+<div class="highlight"><pre>You got to count it <span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter counter-default&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/kbd&gt;</span> times
 </pre></div>
 <h3 id="using-inline-html">Using inline html</h3>
 <div class="highlight-example">
 <span class="counter counter-default">
- You achieved <span class="counter-count badge">120</span>
- out of <span class="counter-max badge">1000</span> points
+ You achieved <kbd class="counter-count">120</kbd>
+ out of <kbd class="counter-max">1000</kbd> points
 </span>
 </div>
 
 
 <div class="highlight"><pre><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter counter-default&quot;</span><span class="nt">&gt;</span>
- You achieved <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-count badge&quot;</span><span class="nt">&gt;</span>120<span class="nt">&lt;/span&gt;</span>
- out of <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-max badge&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/span&gt;</span> points
+ You achieved <span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter-count&quot;</span><span class="nt">&gt;</span>120<span class="nt">&lt;/kbd&gt;</span>
+ out of <span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter-max&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/kbd&gt;</span> points
 <span class="nt">&lt;/span&gt;</span>
 </pre></div>
 <h3 id="using-a-template-engine">Using a template-engine</h3>
@@ -194,7 +194,7 @@ You got to count it <span class="counter counter-default badge">1000</span> time
 </ul>
 <h4 id="using-the-template-option">Using the template-option</h4>
 <div class="highlight-example">
-<div class="counter counter-default" data-value="120" data-max="1000" data-template="You achieved &lt;span class=&apos;badge&apos;&gt;{{count}}&lt;/span&gt; out of &lt;span class=&apos;badge&apos;&gt;{{max}}&lt;/span&gt; points.">
+<div class="counter counter-default" data-value="120" data-max="1000" data-template="You achieved &lt;kbd&gt;{{count}}&lt;/kbd&gt; out of &lt;kbd&gt;{{max}}&lt;/kbd&gt; points.">
 </div>
 </div>
 
@@ -202,14 +202,14 @@ You got to count it <span class="counter counter-default badge">1000</span> time
 <div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;counter counter-default&quot;</span> 
   <span class="na">data-value=</span><span class="s">&quot;120&quot;</span> 
   <span class="na">data-max=</span><span class="s">&quot;1000&quot;</span> 
-  <span class="na">data-template=</span><span class="s">&quot;You achieved &lt;span class=&#39;badge&#39;&gt;</span><span class="cp">{{</span><span class="nv">count</span><span class="cp">}}</span><span class="s">&lt;/span&gt; out of &lt;span class=&#39;badge&#39;&gt;</span><span class="cp">{{</span><span class="nv">max</span><span class="cp">}}</span><span class="s">&lt;/span&gt; points.&quot;</span><span class="nt">&gt;</span>
+  <span class="na">data-template=</span><span class="s">&quot;You achieved &lt;kbd&gt;</span><span class="cp">{{</span><span class="nv">count</span><span class="cp">}}</span><span class="s">&lt;/kbd&gt; out of &lt;kbd&gt;</span><span class="cp">{{</span><span class="nv">max</span><span class="cp">}}</span><span class="s">&lt;/kbd&gt; points.&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 <h4 id="using-an-inline-template">Using an inline template</h4>
 <div class="highlight-example">
 <div class="counter counter-default" data-value="120" data-max="1000">
  <script type="text/x-handlebars-template">
-   You achieved <span class="badge">{{count}}</span> out of <span class="badge">{{max}}</span> points.
+   You achieved <kbd>{{count}}</kbd> out of <kbd>{{max}}</kbd> points.
  </script>
 </div>
 </div>
@@ -219,7 +219,7 @@ You got to count it <span class="counter counter-default badge">1000</span> time
   <span class="na">data-value=</span><span class="s">&quot;120&quot;</span> 
   <span class="na">data-max=</span><span class="s">&quot;1000&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/x-handlebars-template&quot;</span><span class="nt">&gt;</span>
-   <span class="nx">You</span> <span class="nx">achieved</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;badge&quot;</span><span class="o">&gt;</span><span class="cp">{{</span><span class="nv">count</span><span class="cp">}}</span><span class="o">&lt;</span><span class="err">/span&gt; out of &lt;span class=&quot;badge&quot;&gt;</span><span class="cp">{{</span><span class="nv">max</span><span class="cp">}}</span><span class="err">&lt;/span&gt; points.</span>
+   <span class="nx">You</span> <span class="nx">achieved</span> <span class="o">&lt;</span><span class="nx">kbd</span><span class="o">&gt;</span><span class="cp">{{</span><span class="nv">count</span><span class="cp">}}</span><span class="o">&lt;</span><span class="err">/kbd&gt; out of &lt;kbd&gt;</span><span class="cp">{{</span><span class="nv">max</span><span class="cp">}}</span><span class="err">&lt;/kbd&gt; points.</span>
  <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
@@ -228,7 +228,7 @@ You got to count it <span class="counter counter-default badge">1000</span> time
 <div class="counter counter-default" data-template="#counter-template" data-value="120" data-max="1000">
 </div>
 <script id="counter-template" type="text/x-handlebars-template">
-   You achieved <span class="badge">{{count}}</span> out of <span class="badge">{{max}}</span> points.
+   You achieved <kbd>{{count}}</kbd> out of <kbd>{{max}}</kbd> points.
 </script>
 </div>
 
@@ -239,43 +239,80 @@ You got to count it <span class="counter counter-default badge">1000</span> time
   <span class="na">data-max=</span><span class="s">&quot;1000&quot;</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;script </span><span class="na">id=</span><span class="s">&quot;counter-template&quot;</span> <span class="na">type=</span><span class="s">&quot;text/x-handlebars-template&quot;</span><span class="nt">&gt;</span>
-   <span class="nx">You</span> <span class="nx">achieved</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;badge&quot;</span><span class="o">&gt;</span><span class="cp">{{</span><span class="nv">count</span><span class="cp">}}</span><span class="o">&lt;</span><span class="err">/span&gt; out of &lt;span class=&quot;badge&quot;&gt;</span><span class="cp">{{</span><span class="nv">max</span><span class="cp">}}</span><span class="err">&lt;/span&gt; points.</span>
+   <span class="nx">You</span> <span class="nx">achieved</span> <span class="o">&lt;</span><span class="nx">kbd</span><span class="o">&gt;</span><span class="cp">{{</span><span class="nv">count</span><span class="cp">}}</span><span class="o">&lt;</span><span class="err">/kbd&gt; out of &lt;kbd&gt;</span><span class="cp">{{</span><span class="nv">max</span><span class="cp">}}</span><span class="err">&lt;/kbd&gt; points.</span>
 <span class="nt">&lt;/script&gt;</span>
 </pre></div>
 <h2 id="number-formatting">Number formatting</h2>
 <p>Use the following options to format values used by countimator: <code>decimals</code>, <code>decimalDelimiter</code>,<code>thousandDelimiter</code></p>
 <div class="highlight-example">
-<span class="counter counter-default badge" data-decimals="2" data-decimal-delimiter="," data-thousand-delimiter="." data-value="12000.32" data-template="{{count}} EUR">
-</span>
+<kbd class="counter counter-default" data-decimals="2" data-decimal-delimiter="," data-thousand-delimiter="." data-value="12000.32" data-template="{{count}} EUR">0 EUR
+</kbd>
 </div>
 
 
-<div class="highlight"><pre><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter counter-default badge&quot;</span> 
+<div class="highlight"><pre><span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter counter-default&quot;</span> 
   <span class="na">data-decimals=</span><span class="s">&quot;2&quot;</span> 
   <span class="na">data-decimal-delimiter=</span><span class="s">&quot;,&quot;</span> 
   <span class="na">data-thousand-delimiter=</span><span class="s">&quot;.&quot;</span> 
   <span class="na">data-value=</span><span class="s">&quot;12000.32&quot;</span> 
-  <span class="na">data-template=</span><span class="s">&quot;{{count}} EUR&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/span&gt;</span>
+  <span class="na">data-template=</span><span class="s">&quot;{{count}} EUR&quot;</span><span class="nt">&gt;</span>0 EUR
+<span class="nt">&lt;/kbd&gt;</span>
 </pre></div>
 <p>Pad leading zeros by using the <code>pad</code>-option</p>
 <div class="highlight-example">
-<span class="counter counter-default badge" data-value="100" data-pad="3" data-template="{{count}} %">
-</span>
+<kbd class="counter counter-default badge" data-value="100" data-pad="3" data-template="{{count}} %">000 %
+</kbd>
 </div>
 
 
-<div class="highlight"><pre><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter counter-default badge&quot;</span> 
+<div class="highlight"><pre><span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter counter-default badge&quot;</span> 
   <span class="na">data-value=</span><span class="s">&quot;100&quot;</span> 
   <span class="na">data-pad=</span><span class="s">&quot;3&quot;</span> 
-  <span class="na">data-template=</span><span class="s">&quot;{{count}} %&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/span&gt;</span>
+  <span class="na">data-template=</span><span class="s">&quot;{{count}} %&quot;</span><span class="nt">&gt;</span>000 %
+<span class="nt">&lt;/kbd&gt;</span>
+</pre></div>
+<h2 id="trigger-update">Trigger update</h2>
+<p>To trigger the animation from an event at runtime, just call countimator again with a new value:</p>
+<div class="highlight-example">
+<kbd class="counter counter-default" data-decimals="2" data-decimal-delimiter="," data-thousand-delimiter="." data-value="12000.32" data-template="{{count}} EUR">0 EUR
+</kbd>
+<button id="update-counter">
+  Want more?
+</button>
+</div>
+
+
+<div class="highlight"><pre><span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter counter-default&quot;</span> 
+  <span class="na">data-decimals=</span><span class="s">&quot;2&quot;</span> 
+  <span class="na">data-decimal-delimiter=</span><span class="s">&quot;,&quot;</span> 
+  <span class="na">data-thousand-delimiter=</span><span class="s">&quot;.&quot;</span> 
+  <span class="na">data-value=</span><span class="s">&quot;12000.32&quot;</span> 
+  <span class="na">data-template=</span><span class="s">&quot;{{count}} EUR&quot;</span><span class="nt">&gt;</span>0 EUR
+<span class="nt">&lt;/kbd&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;update-counter&quot;</span><span class="nt">&gt;</span>
+  Want more?
+<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+<script>
+try { $('#update-counter').on('click', function() {
+  $(this).fadeOut(500).prev().countimator({
+    value: 22000.12
+  });
+});} catch (e) {}
+</script>
+
+
+<div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#update-counter&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">prev</span><span class="p">().</span><span class="nx">countimator</span><span class="p">({</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="mf">22000.12</span>
+  <span class="p">});</span>
+<span class="p">});</span>
 </pre></div>
 <h2 id="callbacks">Callbacks</h2>
 <p>Get notified when animation changes by providing a callback function to <code>start</code>, <code>step</code> or <code>complete</code>-option.</p>
 <div class="highlight-example">
 <div class="counter-callbacks" data-duration="2500" data-value="120" data-pad="3" data-highscore="65">
-  You achieved <span class="counter-count">0</span> out of <span class="badge counter-max">1000</span> points.
+  You achieved <kbd class="counter-count">0</kbd> out of <kbd class="counter-max">1000</kbd> points.
 </div>
 </div>
 
@@ -285,7 +322,7 @@ You got to count it <span class="counter counter-default badge">1000</span> time
   <span class="na">data-value=</span><span class="s">&quot;120&quot;</span> 
   <span class="na">data-pad=</span><span class="s">&quot;3&quot;</span>
   <span class="na">data-highscore=</span><span class="s">&quot;65&quot;</span><span class="nt">&gt;</span>
-  You achieved <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-count&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;</span> out of <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;badge counter-max&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/span&gt;</span> points.
+  You achieved <span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter-count&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/kbd&gt;</span> out of <span class="nt">&lt;kbd</span> <span class="na">class=</span><span class="s">&quot;counter-max&quot;</span><span class="nt">&gt;</span>1000<span class="nt">&lt;/kbd&gt;</span> points.
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
 <style>
@@ -294,6 +331,7 @@ div.highlight-example .counter-callbacks {
   position: relative;
   top: 0;
   opacity: 1;
+  text-transform: uppercase;
 }
 
 div.highlight-example .counter-callbacks:after {
@@ -334,6 +372,7 @@ div.highlight-example .counter-callbacks.complete {
   <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
   <span class="k">top</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
   <span class="k">opacity</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.counter-callbacks</span><span class="nd">:after</span> <span class="p">{</span>
   <span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0.5s</span> <span class="n">ease</span><span class="o">-</span><span class="n">out</span><span class="p">;</span>
@@ -394,107 +433,198 @@ try { $('.counter-callbacks').countimator({
 <h2 id="wheel">Wheel</h2>
 <p>Countimator is shipped with a custom wheel-style.</p>
 <p>Add the wheel-plugin after jquery.countimator.js</p>
-<div><script src="jquery.countimator.wheel.min.js"></script>
+<div><script src="js/jquery.countimator.wheel.min.js"></script>
 </div>
 
 
 
-<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.countimator.wheel.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;js/jquery.countimator.wheel.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
-<p>The appearance of the wheel can be customized using tradional css. See the following code for an example of using the wheel-plugin with callbacks and custom styles:</p>
-<p>Provide counter markup</p>
+<p>Include the wheel stylesheet.</p>
+<div><link rel="stylesheet" href="css/jquery.countimator.wheel.css"></link>
+</div>
+
+
+
+<div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href=</span><span class="s">&quot;css/jquery.countimator.wheel.css&quot;</span><span class="nt">&gt;&lt;/link&gt;</span>
+</pre></div>
 <div class="highlight-example">
-<div class="counter-wheel" data-style="wheel" data-max="12" data-value="10" data-pad="2">
-   <span class="counter-count">0</span><hr><span class="counter-max">12</span>
+<div class="counter counter-wheel" data-style="wheel" data-max="12" data-value="10" data-count="0" data-pad="2">0
 </div>
 </div>
 
 
-<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;counter-wheel&quot;</span> 
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;counter counter-wheel&quot;</span> 
  <span class="na">data-style=</span><span class="s">&quot;wheel&quot;</span> 
  <span class="na">data-max=</span><span class="s">&quot;12&quot;</span> 
- <span class="na">data-value=</span><span class="s">&quot;10&quot;</span> 
- <span class="na">data-pad=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-count&quot;</span><span class="nt">&gt;</span>0<span class="nt">&lt;/span&gt;&lt;hr/&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-max&quot;</span><span class="nt">&gt;</span>12<span class="nt">&lt;/span&gt;</span>
+ <span class="na">data-value=</span><span class="s">&quot;10&quot;</span>
+ <span class="na">data-count=</span><span class="s">&quot;0&quot;</span>  
+ <span class="na">data-pad=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>0
 <span class="nt">&lt;/div&gt;</span>
 </pre></div>
-<p>Initialize countimator with callbacks</p>
+<style>
+div.highlight-example .counter-wheel {
+  color: teal;
+}
+</style>
+
+
+<div class="highlight"><pre><span class="nc">.counter-wheel</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">teal</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<h3 id="customize">Customize</h3>
+<p>See the following code for an example of using the wheel-plugin with styles, callbacks and triggers:</p>
+<div class="highlight-example">
+<div class="counter-wheel counter-wheel-callbacks" data-style="wheel" data-max="12" data-value="2" data-pad="2">
+  <div class="counter-wheel-content">
+    <small>Your</small><br>
+    <div><span class="counter-count counter-wheel-highlight">00</span>/<span class="counter-max">12</span></div>
+    <small>Score</small>
+  </div>
+</div>
+<button>Click me!</button>
+</div>
+
+
+<div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;counter-wheel counter-wheel-callbacks&quot;</span> 
+ <span class="na">data-style=</span><span class="s">&quot;wheel&quot;</span> 
+ <span class="na">data-max=</span><span class="s">&quot;12&quot;</span> 
+ <span class="na">data-value=</span><span class="s">&quot;2&quot;</span> 
+ <span class="na">data-pad=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;counter-wheel-content&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;small&gt;</span>Your<span class="nt">&lt;/small&gt;&lt;br/&gt;</span>
+    <span class="nt">&lt;div&gt;&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-count counter-wheel-highlight&quot;</span><span class="nt">&gt;</span>00<span class="nt">&lt;/span&gt;</span>/<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;counter-max&quot;</span><span class="nt">&gt;</span>12<span class="nt">&lt;/span&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;small&gt;</span>Score<span class="nt">&lt;/small&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;button&gt;</span>Click me!<span class="nt">&lt;/button&gt;</span>
+</pre></div>
+<p>Customize appearance using css:</p>
+<style>
+div.highlight-example .counter-wheel-callbacks {
+  width: 200px;
+  height: 200px;
+  border-color: #ddd;
+  border-width: 10px;
+  background: #101433;
+  text-transform: uppercase;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 15px;
+  line-height: 28px;
+}
+
+div.highlight-example .counter-wheel-callbacks .counter-wheel-content {
+  background: #fff;
+  color: #000;
+}
+
+div.highlight-example .counter-wheel-callbacks .counter-wheel-content > div {
+  font-weight: bold;
+  font-size: 32px;
+}
+
+div.highlight-example .counter-wheel-callbacks .counter-wheel-content > div > * {
+  margin: 0 5px;
+}
+
+div.highlight-example .counter-wheel-callbacks .counter-wheel-highlight {
+  transition: all .25s ease-in;
+  -webkit-transition: all .25s ease-in;
+  color: #E71232;
+}
+
+div.highlight-example .counter-level-warn .counter-wheel-highlight {
+  color: orange;
+}
+
+div.highlight-example .counter-level-ok .counter-wheel-highlight {
+  color: green;
+}
+</style>
+
+
+<div class="highlight"><pre><span class="nc">.counter-wheel-callbacks</span> <span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+  <span class="k">height</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+  <span class="k">border-color</span><span class="o">:</span> <span class="m">#ddd</span><span class="p">;</span>
+  <span class="k">border-width</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="k">background</span><span class="o">:</span> <span class="m">#101433</span><span class="p">;</span>
+  <span class="k">text-transform</span><span class="o">:</span> <span class="k">uppercase</span><span class="p">;</span>
+  <span class="k">font-family</span><span class="o">:</span> <span class="k">inherit</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">16px</span><span class="p">;</span>
+  <span class="k">padding</span><span class="o">:</span> <span class="m">15px</span><span class="p">;</span>
+  <span class="k">line-height</span><span class="o">:</span> <span class="m">28px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.counter-wheel-callbacks</span> <span class="nc">.counter-wheel-content</span> <span class="p">{</span>
+  <span class="k">background</span><span class="o">:</span> <span class="m">#fff</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.counter-wheel-callbacks</span> <span class="nc">.counter-wheel-content</span> <span class="o">&gt;</span> <span class="nt">div</span> <span class="p">{</span>
+  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+  <span class="k">font-size</span><span class="o">:</span> <span class="m">32px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.counter-wheel-callbacks</span> <span class="nc">.counter-wheel-content</span> <span class="o">&gt;</span> <span class="nt">div</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+  <span class="k">margin</span><span class="o">:</span> <span class="m">0</span> <span class="m">5px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.counter-wheel-callbacks</span> <span class="nc">.counter-wheel-highlight</span> <span class="p">{</span>
+  <span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">.25s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
+  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">.25s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span> <span class="m">#E71232</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.counter-level-warn</span> <span class="nc">.counter-wheel-highlight</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.counter-level-ok</span> <span class="nc">.counter-wheel-highlight</span> <span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<p>Initialize countimator with callbacks and register button listener</p>
 <script>
 try { $(function() {
-  $('.counter-wheel').countimator({
+  $('.counter-wheel-callbacks').countimator({
     step: function(count, options) {
       var
         p = count / options.max;
-      $('.counter-wheel').toggleClass('counter-level-ok', p >= 0.75);
-      $('.counter-wheel').toggleClass('counter-level-warn', p >= 0.1 && p < 0.75);
-      $('.counter-wheel').toggleClass('counter-level-critical', p < 0.1);
+      $(this).toggleClass('counter-level-ok', p >= 0.5);
+      $(this).toggleClass('counter-level-warn', p >= 0.25 && p < 0.5);
+      $(this).toggleClass('counter-level-critical', p < 0.25);
     }
+  });
+  $('.counter-wheel-callbacks + button').on('click', function() {
+    var countimator = $('.counter-wheel-callbacks').data('countimator');
+    $(this).fadeOut(500).prev().countimator({
+      value: 8
+    });
   });
 });} catch (e) {}
 </script>
 
 
 <div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel&#39;</span><span class="p">).</span><span class="nx">countimator</span><span class="p">({</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel-callbacks&#39;</span><span class="p">).</span><span class="nx">countimator</span><span class="p">({</span>
     <span class="nx">step</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">count</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span>
         <span class="nx">p</span> <span class="o">=</span> <span class="nx">count</span> <span class="o">/</span> <span class="nx">options</span><span class="p">.</span><span class="nx">max</span><span class="p">;</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel&#39;</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">&#39;counter-level-ok&#39;</span><span class="p">,</span> <span class="nx">p</span> <span class="o">&gt;=</span> <span class="mf">0.75</span><span class="p">);</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel&#39;</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">&#39;counter-level-warn&#39;</span><span class="p">,</span> <span class="nx">p</span> <span class="o">&gt;=</span> <span class="mf">0.1</span> <span class="o">&amp;&amp;</span> <span class="nx">p</span> <span class="o">&lt;</span> <span class="mf">0.75</span><span class="p">);</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel&#39;</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">&#39;counter-level-critical&#39;</span><span class="p">,</span> <span class="nx">p</span> <span class="o">&lt;</span> <span class="mf">0.1</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">&#39;counter-level-ok&#39;</span><span class="p">,</span> <span class="nx">p</span> <span class="o">&gt;=</span> <span class="mf">0.5</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">&#39;counter-level-warn&#39;</span><span class="p">,</span> <span class="nx">p</span> <span class="o">&gt;=</span> <span class="mf">0.25</span> <span class="o">&amp;&amp;</span> <span class="nx">p</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">);</span>
+      <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">toggleClass</span><span class="p">(</span><span class="s1">&#39;counter-level-critical&#39;</span><span class="p">,</span> <span class="nx">p</span> <span class="o">&lt;</span> <span class="mf">0.25</span><span class="p">);</span>
     <span class="p">}</span>
   <span class="p">});</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel-callbacks + button&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">countimator</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.counter-wheel-callbacks&#39;</span><span class="p">).</span><span class="nx">data</span><span class="p">(</span><span class="s1">&#39;countimator&#39;</span><span class="p">);</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">fadeOut</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="nx">prev</span><span class="p">().</span><span class="nx">countimator</span><span class="p">({</span>
+      <span class="nx">value</span><span class="o">:</span> <span class="mi">8</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
 <span class="p">});</span>
-</pre></div>
-<style>
-div.highlight-example .counter-wheel path {
-  fill: red;
-  transition: all 0.25s ease-in;
-}
-
-div.highlight-example .counter-wheel .counter-count {
-  color: red;
-  transition: all 0.25s ease-in;
-}
-
-div.highlight-example .counter-level-warn path {
-  fill: orange;
-}
-
-div.highlight-example .counter-level-warn .counter-count {
-  color: orange;
-}
-
-div.highlight-example .counter-level-ok path {
-  fill: green;
-}
-
-div.highlight-example .counter-level-ok .counter-count {
-  color: green;
-}
-</style>
-
-
-<div class="highlight"><pre><span class="nc">.counter-wheel</span> <span class="nt">path</span> <span class="p">{</span>
-  <span class="n">fill</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-  <span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0.25s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
-<span class="p">}</span> 
-<span class="nc">.counter-wheel</span> <span class="nc">.counter-count</span> <span class="p">{</span>
-  <span class="k">color</span><span class="o">:</span> <span class="nb">red</span><span class="p">;</span>
-  <span class="n">transition</span><span class="o">:</span> <span class="n">all</span> <span class="m">0.25s</span> <span class="n">ease</span><span class="o">-</span><span class="n">in</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.counter-level-warn</span> <span class="nt">path</span> <span class="p">{</span>
-  <span class="n">fill</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.counter-level-warn</span> <span class="nc">.counter-count</span> <span class="p">{</span>
-  <span class="k">color</span><span class="o">:</span> <span class="nb">orange</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.counter-level-ok</span> <span class="nt">path</span> <span class="p">{</span>
-  <span class="n">fill</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.counter-level-ok</span> <span class="nc">.counter-count</span> <span class="p">{</span>
-  <span class="k">color</span><span class="o">:</span> <span class="nb">green</span><span class="p">;</span>
-<span class="p">}</span>
 </pre></div>
 <h2 id="options">Options</h2>
 <table>

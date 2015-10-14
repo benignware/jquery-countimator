@@ -5,7 +5,7 @@
     sAngle-= Math.PI / 2;
     eAngle-= Math.PI / 2;
     var
-      d = 'M ' + Math.round(cx) + ', ' + Math.round(cy),
+      d = 'M ' + cx + ', ' + cy,
       cxs,
       cys,
       cxe,
@@ -28,36 +28,36 @@
   var wheelStyle = {
     render: function(count, options) {
       var
+        radius = 200,
         min = options.min ? parseFloat(options.min) : 0,
         max = options.max ? parseFloat(options.max) : 0,
-        $svg = $(this).find('> svg.counter-wheel-container');
-        
-      if (!$svg.length) {
-        $svg = $(
-          '<svg class="counter-wheel-container" width="180" height="180">'
-          + '<circle class="circle" cx="90" cy="90" r="90" fill="#ddd"/>'
-          + '<circle class="circle" cx="90" cy="90" r="80" fill="#999"/>'
-          + '<path class="level" d="M0 0" fill="blue"/>'
-          + '<circle class="circle" cx="90" cy="90" r="60" stroke="#ddd" stroke-width="10" fill="white"/>'
-          + '<g class="content" style="text-align: center">'
-            + '<foreignObject x="45" y="45" width="90" height="90"></foreignObject>'
-          + '</g>' + 
-          '</svg>'
-        );
-        $content = $svg.find('foreignObject').append($(this).children());
-        $(this).append($svg);
-      }
-      $svg.attr('viewBox', "0 0 " + $(this).width() + " " + $(this).height());
-      
-      var
-        cx = 90,
-        cy = 90,
-        r = 80,
+        cx = radius,
+        cy = radius,
+        r = radius,
         p = (count - min) / (max - min),
         a = p * Math.PI * 2,
-        d = arcPath(cx, cy, r, 0, a);
-        
-      $svg.find('path').attr('d', d);
+        d = arcPath(cx, cy, r + 1, 0, a),
+        $graphics = $(this).find('> .counter-wheel-graphics'),
+
+        $content = $(this).find('> .counter-wheel-content');
+      
+      count = Math.min(max, Math.max(min, count));
+      
+      if (!$content.length) {
+        $(this).prepend($(this).wrapInner('<div class="counter-wheel-content"></div>'));
+      }
+      
+      if (!$graphics.length) {
+        $graphics = $(
+          '<svg preserveAspectRatio="none" class="counter-wheel-graphics" viewBox="0 0 ' + radius * 2 + ' ' + radius * 2 + '">' + 
+            '<path class="counter-wheel-highlight" d="M0 0" fill="teal"/>' + 
+          '</svg>'
+        );
+        $(this).prepend($graphics);
+      }
+      
+      $graphics.find('path').attr('d', d);
+      
     }
   };
   
