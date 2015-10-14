@@ -16,8 +16,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/jquery.countimator.min.js': [ 'dist/jquery.countimator.js'],
-          'dist/jquery.countimator.wheel.min.js': [ 'dist/jquery.countimator.wheel.js']
+          'dist/js/jquery.countimator.min.js': [ 'dist/js/jquery.countimator.js'],
+          'dist/js/jquery.countimator.wheel.min.js': [ 'dist/js/jquery.countimator.wheel.js']
         }
       }
     },
